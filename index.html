@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Researcher | Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Binary Background Animation */
+        .binary-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .binary-digit {
+            position: absolute;
+            font-family: 'SF Mono', 'Roboto Mono', 'Fira Code', monospace;
+            font-size: 20px;
+            color: rgba(0, 255, 150, 0.4);
+            font-weight: 600;
+            pointer-events: none;
+            animation: fadeGlitch 3s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 150, 0.5);
+        }
+
+        @keyframes fadeGlitch {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+            5% {
+                opacity: 1;
+            }
+            10% {
+                transform: translateY(-5px) scale(1.15) rotate(5deg);
+                color: rgba(0, 255, 150, 0.6);
+                text-shadow: 0 0 15px rgba(0, 255, 150, 0.8),
+                             0 0 25px rgba(0, 255, 150, 0.4);
+            }
+            15% {
+                transform: translateY(0) scale(1) rotate(-3deg);
+                color: rgba(0, 255, 150, 0.4);
+            }
+            20% {
+                transform: translateX(-4px) rotate(2deg);
+                text-shadow: 2px 0 5px rgba(255, 0, 100, 0.5),
+                             -2px 0 5px rgba(0, 255, 150, 0.5);
+            }
+            25% {
+                transform: translateX(4px) rotate(-2deg);
+                color: rgba(0, 212, 255, 0.5);
+            }
+            30% {
+                transform: translateX(0) scale(1.05);
+                text-shadow: 0 0 10px rgba(0, 255, 150, 0.5);
+            }
+            35% {
+                content: attr(data-alt);
+                color: rgba(255, 0, 100, 0.4);
+            }
+            40% {
+                transform: scale(0.95) rotate(1deg);
+            }
+            45% {
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(10px) scale(1.1) rotate(-5deg);
+                color: rgba(0, 255, 150, 0.5);
+            }
+            55% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.7) rotate(10deg);
+            }
+        }
+
+        /* Glitch effect */
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                            0.05em 0 0 rgba(0, 255, 0, 0.75),
+                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                            0.05em 0 0 rgba(0, 255, 0, 0.75),
+                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            100% {
+                text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .content {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: glitch 5s infinite;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 50px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .accent {
+            color: #00ff88;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 18px;
+            color: #0a0e27;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .status-message.success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            display: block;
+        }
+
+        .status-message.error {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: #ff4444;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .contact-form {
+                padding: 25px;
+            }
+            .logo {
+                font-size: 36px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(10, 14, 39, 0.3);
+            border-radius: 50%;
+            border-top-color: #0a0e27;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Binary Background -->
+    <div class="binary-bg" id="binaryBg"></div>
+
+    <div class="container">
+        <div class="content">
+            <div class="logo">🔐</div>
+            <h1>Security Researcher</h1>
+            <p class="subtitle">Pentesting • Bug Bounty • <span class="accent">Ethical Hacking</span></p>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="How can I help you?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Send Message
+                </button>
+
+                <div class="status-message" id="statusMessage"></div>
+            </form>
+
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank" title="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/yourhandle" class="social-link" target="_blank" title="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank" title="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 • Built with security in mind
+        </div>
+    </div>
+
+    <script>
+        // Binary background animation - Random spawning digits with dynamic changes
+        function createBinaryDigit() {
+            const bg = document.getElementById('binaryBg');
+            const digit = document.createElement('div');
+            digit.className = 'binary-digit';
+            
+            // Start with random digit
+            const initialDigit = Math.random() > 0.5 ? '1' : '0';
+            digit.textContent = initialDigit;
+            
+            // Random position
+            digit.style.left = Math.random() * 100 + '%';
+            digit.style.top = Math.random() * 100 + '%';
+            
+            // Random animation duration for glitch effect
+            const duration = (Math.random() * 2.5 + 2) + 's';
+            digit.style.animationDuration = duration;
+            
+            // Random delay
+            digit.style.animationDelay = (Math.random() * 1.5) + 's';
+            
+            // Random size variation
+            const size = (Math.random() * 12 + 16) + 'px';
+            digit.style.fontSize = size;
+            
+            // Random initial color
+            const colors = [
+                'rgba(0, 255, 150, 0.4)',
+                'rgba(0, 212, 255, 0.4)',
+                'rgba(255, 0, 100, 0.3)',
+                'rgba(0, 255, 150, 0.5)'
+            ];
+            digit.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Randomly flip the digit while animating
+            const flipInterval = setInterval(() => {
+                if (Math.random() > 0.7) {
+                    digit.textContent = digit.textContent === '1' ? '0' : '1';
+                }
+            }, 200);
+            
+            bg.appendChild(digit);
+            
+            // Remove after animation
+            setTimeout(() => {
+                clearInterval(flipInterval);
+                digit.remove();
+            }, parseFloat(duration) * 1000 + 2000);
+        }
+
+        // Create digits continuously
+        function startBinaryRain() {
+            const density = window.innerWidth < 768 ? 60 : 120; // Number of digits on screen
+            
+            // Initial burst
+            for (let i = 0; i < density; i++) {
+                setTimeout(() => {
+                    createBinaryDigit();
+                }, Math.random() * 2000);
+            }
+            
+            // Continuous spawning
+            setInterval(() => {
+                createBinaryDigit();
+            }, 120); // Spawn new digit every 120ms
+        }
+
+        startBinaryRain();
+
+        // Form submission with FormSubmit.co (FREE email service)
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>';
+            statusMessage.className = 'status-message';
+            statusMessage.style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            try {
+                // Using FormSubmit.co - Replace YOUR_EMAIL with your actual email
+                const response = await fetch('https://formsubmit.co/josephtabia@gmail.com', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    statusMessage.className = 'status-message success';
+                    statusMessage.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+                    this.reset();
+                } else {
+                    throw new Error('Failed to send');
+                }
+            } catch (error) {
+                statusMessage.className = 'status-message error';
+                statusMessage.textContent = '✗ Failed to send message. Please try again or email me directly.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+
+        // Add glitch effect on hover
+        const title = document.querySelector('h1');
+        title.addEventListener('mouseenter', function() {
+            this.style.animation = 'glitch 0.3s infinite';
+        });
+        title.addEventListener('mouseleave', function() {
+            this.style.animation = 'none';
+        });
+    </script>
+</body>
+</html>
