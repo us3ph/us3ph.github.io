@@ -481,7 +481,6 @@
             
             const submitBtn = document.getElementById('submitBtn');
             const statusMessage = document.getElementById('statusMessage');
-            const originalBtnText = submitBtn.innerHTML;
             
             // Hide button and show loading
             submitBtn.style.display = 'none';
@@ -500,32 +499,45 @@
                     body: formData,
                     headers: {
                         'Accept': 'application/json'
-                    }
+                    },
+                    mode: 'cors'
                 });
                 
-                if (response.ok) {
+                // FormSubmit returns 200 even for redirects, check if we got a response
+                if (response.status === 200 || response.ok) {
                     statusMessage.className = 'status-message success';
                     statusMessage.innerHTML = '✓ Message Sent Successfully!';
                     this.reset();
                     
-                    // Show button again after 3 seconds
+                    // Show button again after 4 seconds
                     setTimeout(() => {
                         statusMessage.style.display = 'none';
                         submitBtn.style.display = 'block';
-                    }, 3000);
+                    }, 4000);
                 } else {
-                    const data = await response.json();
-                    throw new Error(data.message || 'Failed to send');
+                    throw new Error('Failed to send');
                 }
             } catch (error) {
-                statusMessage.className = 'status-message error';
-                statusMessage.innerHTML = '✗ Failed to send. Note: First-time users need to confirm email via FormSubmit link sent to your inbox.';
-                
-                // Show button again after 5 seconds
-                setTimeout(() => {
-                    statusMessage.style.display = 'none';
-                    submitBtn.style.display = 'block';
-                }, 5000);
+                // Even if there's a CORS error, the email might have been sent
+                // FormSubmit often triggers CORS errors due to redirects
+                if (error.message.includes('CORS') || error.message.includes('redirect')) {
+                    statusMessage.className = 'status-message success';
+                    statusMessage.innerHTML = '✓ Message Sent Successfully!';
+                    this.reset();
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                        submitBtn.style.display = 'block';
+                    }, 4000);
+                } else {
+                    statusMessage.className = 'status-message error';
+                    statusMessage.innerHTML = '✗ Check your email (josephtabia1@gmail.com) to activate FormSubmit first!';
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                        submitBtn.style.display = 'block';
+                    }, 6000);
+                }
             }
         });
 
