@@ -288,25 +288,30 @@
         }
 
         .status-message {
-            margin-top: 20px;
-            padding: 15px;
+            width: 100%;
+            padding: 18px;
             border-radius: 10px;
             display: none;
-            font-weight: 500;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
         .status-message.success {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            color: #00ff88;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            color: #0a0e27;
             display: block;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
         }
 
         .status-message.error {
-            background: rgba(255, 68, 68, 0.1);
-            border: 1px solid rgba(255, 68, 68, 0.3);
-            color: #ff4444;
+            background: rgba(255, 68, 68, 0.2);
+            border: 2px solid #ff4444;
+            color: #ff6b6b;
             display: block;
+            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -478,10 +483,14 @@
             const statusMessage = document.getElementById('statusMessage');
             const originalBtnText = submitBtn.innerHTML;
             
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading"></span>';
+            // Hide button and show loading
+            submitBtn.style.display = 'none';
             statusMessage.className = 'status-message';
-            statusMessage.style.display = 'none';
+            statusMessage.style.display = 'block';
+            statusMessage.style.background = 'rgba(255, 255, 255, 0.1)';
+            statusMessage.style.border = '1px solid rgba(0, 255, 136, 0.3)';
+            statusMessage.style.color = '#fff';
+            statusMessage.innerHTML = '<span class="loading"></span> Sending...';
             
             const formData = new FormData(this);
             
@@ -496,17 +505,27 @@
                 
                 if (response.ok) {
                     statusMessage.className = 'status-message success';
-                    statusMessage.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+                    statusMessage.innerHTML = '✓ Message Sent Successfully!';
                     this.reset();
+                    
+                    // Show button again after 3 seconds
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                        submitBtn.style.display = 'block';
+                    }, 3000);
                 } else {
-                    throw new Error('Failed to send');
+                    const data = await response.json();
+                    throw new Error(data.message || 'Failed to send');
                 }
             } catch (error) {
                 statusMessage.className = 'status-message error';
-                statusMessage.textContent = '✗ Failed to send message. Please try again or email me directly.';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                statusMessage.innerHTML = '✗ Failed to send. Note: First-time users need to confirm email via FormSubmit link sent to your inbox.';
+                
+                // Show button again after 5 seconds
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                    submitBtn.style.display = 'block';
+                }, 5000);
             }
         });
 
