@@ -529,19 +529,6 @@
                 return false;
             }
         });
-
-        (function() {
-            const devtools = /./;
-            devtools.toString = function() {
-                this.opened = true;
-            }
-            const checkDevTools = setInterval(function() {
-                console.log('%c', devtools);
-                if (devtools.opened) {
-                    window.location.reload();
-                }
-            }, 1000);
-        })();
     </script>
 </body>
 </html>
