@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Researcher | Portfolio</title>
+    <title>Cybersecurity Consultant | Portfolio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -19,6 +19,7 @@
             color: #fff;
             overflow-x: hidden;
         }
+
         .binary-bg {
             position: fixed;
             top: 0;
@@ -97,44 +98,6 @@
             }
         }
 
-        @keyframes glitch {
-            0% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            14% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            15% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            49% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            50% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            99% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            100% {
-                text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-        }
-
         .container {
             position: relative;
             z-index: 1;
@@ -146,38 +109,101 @@
         }
 
         .content {
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             text-align: center;
         }
 
-        .logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: glitch 5s infinite;
+        .header-section {
+            margin-bottom: 50px;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 15px;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ff88, #00d4ff, transparent);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h1:hover {
+            letter-spacing: -1px;
+            transform: translateY(-3px);
+            text-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        h1:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1:hover {
+            animation: float 2s ease-in-out infinite;
         }
 
         .subtitle {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 50px;
-            font-weight: 400;
+            font-size: 1.35rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            font-weight: 500;
             letter-spacing: 0.5px;
         }
 
         .accent {
             color: #00ff88;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-text .highlight {
+            color: #00ff88;
+            font-weight: 600;
         }
 
         .contact-form {
@@ -192,15 +218,25 @@
         .form-group {
             margin-bottom: 25px;
             text-align: left;
+            position: relative;
         }
 
         .form-group label {
             display: block;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 0.95rem;
             font-weight: 600;
             letter-spacing: 0.3px;
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .form-group input,
@@ -209,11 +245,31 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 136, 0.3);
             border-radius: 10px;
-            padding: 15px;
+            padding: 16px;
             color: #fff;
             font-size: 1rem;
-            font-family: inherit;
+            font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:not(:placeholder-shown) ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 12px;
+            font-size: 0.75rem;
+            padding: 0 8px;
+            background: #0a0e27;
+            -webkit-text-fill-color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: transparent;
         }
 
         .form-group input:focus,
@@ -226,7 +282,25 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 130px;
+        }
+
+        /* Animated progress line */
+        .form-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .form-group input:focus ~ .progress-line,
+        .form-group textarea:focus ~ .progress-line {
+            width: 100%;
         }
 
         .submit-btn {
@@ -241,7 +315,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
         }
 
         .submit-btn:hover {
@@ -251,11 +326,6 @@
 
         .submit-btn:active {
             transform: translateY(0);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .social-links {
@@ -316,16 +386,17 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                letter-spacing: -2px;
             }
             .subtitle {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+            .description {
+                font-size: 0.95rem;
             }
             .contact-form {
-                padding: 25px;
-            }
-            .logo {
-                font-size: 36px;
+                padding: 30px 25px;
             }
         }
 
@@ -355,32 +426,35 @@
     </style>
 </head>
 <body>
-
     <div class="binary-bg" id="binaryBg"></div>
 
     <div class="container">
         <div class="content">
-            <h1>Security Researcher</h1>
-            <p class="subtitle"><span class="accent">Pentesting</span> • <span class="accent">Bug Bounty</span> • <span class="accent">Ethical Hacking</span></p>
+            <div class="header-section">
+                <h1>Cybersecurity<br>Consultant</h1>
+            </div>
 
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your name">
+                    <input type="text" id="name" name="name" required placeholder=" ">
+                    <label for="name">Your Name</label>
+                    <div class="progress-line"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    <input type="email" id="email" name="email" required placeholder=" ">
+                    <label for="email">Email Address</label>
+                    <div class="progress-line"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="How can I help you?"></textarea>
+                    <textarea id="message" name="message" required placeholder=" "></textarea>
+                    <label for="message">Project Details</label>
+                    <div class="progress-line"></div>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submitBtn">
-                    Send Message
+                    Get In Touch
                 </button>
 
                 <div class="status-message" id="statusMessage"></div>
@@ -406,25 +480,22 @@
         </div>
 
         <div class="footer">
-            © 2026 • Built with security in mind
+            © 2026 • Secure by design
         </div>
     </div>
 
     <script>
-
         function createBinaryDigit() {
             const bg = document.getElementById('binaryBg');
             const digit = document.createElement('div');
             digit.className = 'binary-digit';
             
-
             const initialDigit = Math.random() > 0.5 ? '1' : '0';
             digit.textContent = initialDigit;
             
             digit.style.left = Math.random() * 100 + '%';
             digit.style.top = Math.random() * 100 + '%';
             
-
             const duration = (Math.random() * 2.5 + 2) + 's';
             digit.style.animationDuration = duration;
             
@@ -471,6 +542,26 @@
 
         startBinaryRain();
 
+        // Animated progress lines for form fields
+        const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
+        
+        formInputs.forEach(input => {
+            const formGroup = input.closest('.form-group');
+            const progressLine = formGroup.querySelector('.progress-line');
+            
+            input.addEventListener('focus', () => {
+                if (progressLine) {
+                    progressLine.style.width = '100%';
+                }
+            });
+            
+            input.addEventListener('blur', () => {
+                if (progressLine) {
+                    progressLine.style.width = '0';
+                }
+            });
+        });
+
         const getEndpoint = () => {
             const parts = ['https://for', 'msubmit.co/', atob('am9zZXBodGFiaWExQA==')];
             return parts[0] + parts[1] + parts[2] + atob('Z21haWwuY29t');
@@ -482,7 +573,6 @@
             const submitBtn = document.getElementById('submitBtn');
             const statusMessage = document.getElementById('statusMessage');
             
-            // Hide button and show loading
             submitBtn.style.display = 'none';
             statusMessage.className = 'status-message';
             statusMessage.style.display = 'block';
@@ -503,13 +593,11 @@
                     mode: 'cors'
                 });
                 
-                // FormSubmit returns 200 even for redirects, check if we got a response
                 if (response.status === 200 || response.ok) {
                     statusMessage.className = 'status-message success';
                     statusMessage.innerHTML = '✓ Message Sent Successfully!';
                     this.reset();
                     
-                    // Show button again after 4 seconds
                     setTimeout(() => {
                         statusMessage.style.display = 'none';
                         submitBtn.style.display = 'block';
@@ -518,8 +606,6 @@
                     throw new Error('Failed to send');
                 }
             } catch (error) {
-                // Even if there's a CORS error, the email might have been sent
-                // FormSubmit often triggers CORS errors due to redirects
                 if (error.message.includes('CORS') || error.message.includes('redirect')) {
                     statusMessage.className = 'status-message success';
                     statusMessage.innerHTML = '✓ Message Sent Successfully!';
@@ -531,7 +617,7 @@
                     }, 4000);
                 } else {
                     statusMessage.className = 'status-message error';
-                    statusMessage.innerHTML = '✗ Check your email (josephtabia1@gmail.com) to activate FormSubmit first!';
+                    statusMessage.innerHTML = '✗ Failed to send. Please try again.';
                     
                     setTimeout(() => {
                         statusMessage.style.display = 'none';
@@ -541,12 +627,51 @@
             }
         });
 
+        // Title glitch effect on hover
         const title = document.querySelector('h1');
+        const originalText = title.innerHTML;
+        let glitchInterval;
+        
+        const binaryChars = ['0', '1'];
+        const glitchColors = [
+            'rgba(0, 255, 150, 0.9)',
+            'rgba(0, 212, 255, 0.9)',
+            'rgba(255, 0, 100, 0.8)',
+            'rgba(0, 255, 150, 0.7)'
+        ];
+        
+        function getRandomBinary() {
+            return binaryChars[Math.floor(Math.random() * binaryChars.length)];
+        }
+        
+        function getRandomColor() {
+            return glitchColors[Math.floor(Math.random() * glitchColors.length)];
+        }
+        
+        function glitchText() {
+            const lines = originalText.split('<br>');
+            const glitchedLines = lines.map(line => {
+                return line.split('').map(char => {
+                    if (char === ' ') return char;
+                    if (Math.random() > 0.85) {
+                        const color = getRandomColor();
+                        return `<span style="color: ${color}; text-shadow: 0 0 10px ${color};">${getRandomBinary()}</span>`;
+                    }
+                    return char;
+                }).join('');
+            });
+            title.innerHTML = glitchedLines.join('<br>');
+        }
+        
         title.addEventListener('mouseenter', function() {
-            this.style.animation = 'glitch 0.3s infinite';
+            glitchInterval = setInterval(glitchText, 200);
         });
+        
         title.addEventListener('mouseleave', function() {
-            this.style.animation = 'none';
+            clearInterval(glitchInterval);
+            setTimeout(() => {
+                title.innerHTML = originalText;
+            }, 100);
         });
 
         document.addEventListener('contextmenu', e => e.preventDefault());
