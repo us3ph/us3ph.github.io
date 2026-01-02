@@ -146,27 +146,13 @@
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        h1:hover {
-            letter-spacing: -1px;
-            transform: translateY(-3px);
-            text-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
         h1:hover::after {
             transform: translateX(-50%) scaleX(1);
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
         h1:hover {
-            animation: float 2s ease-in-out infinite;
+            letter-spacing: -1px;
+            text-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
         }
 
         .subtitle {
@@ -213,6 +199,155 @@
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .contact-form.form-collapsing {
+            max-height: 0;
+            padding: 0;
+            opacity: 0;
+            transform: scale(0.95);
+            margin-bottom: 0;
+        }
+
+        .success-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-animation.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        .success-checkmark svg {
+            width: 40px;
+            height: 40px;
+            stroke: #0a0e27;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            animation: drawCheck 0.5s ease-out 0.3s forwards;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .success-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: slideUp 0.5s ease-out 0.4s backwards;
+        }
+
+        .success-subtext {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            animation: slideUp 0.5s ease-out 0.5s backwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-container {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .loading-container.show {
+            display: block;
+        }
+
+        .loading-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            border: 4px solid rgba(0, 255, 136, 0.2);
+            border-top: 4px solid #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .form-group {
@@ -435,6 +570,16 @@
             </div>
 
             <form class="contact-form" id="contactForm">
+                <div class="success-animation" id="successAnimation">
+                    <div class="success-checkmark">
+                        <svg viewBox="0 0 52 52">
+                            <path d="M14 27l7 7 16-16"/>
+                        </svg>
+                    </div>
+                    <div class="success-text">Message Sent!</div>
+                    <div class="success-subtext">I'll get back to you soon</div>
+                </div>
+
                 <div class="form-group">
                     <input type="text" id="name" name="name" required placeholder=" ">
                     <label for="name">Your Name</label>
@@ -456,9 +601,12 @@
                 <button type="submit" class="submit-btn" id="submitBtn">
                     Get In Touch
                 </button>
-
-                <div class="status-message" id="statusMessage"></div>
             </form>
+
+            <div class="loading-container" id="loadingContainer">
+                <div class="loading-text">Future is loading...</div>
+                <div class="loading-spinner"></div>
+            </div>
 
             <div class="social-links">
                 <a href="https://github.com/404" class="social-link" target="_blank" title="GitHub">
@@ -571,15 +719,13 @@
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
-            const statusMessage = document.getElementById('statusMessage');
+            const contactForm = document.getElementById('contactForm');
+            const successAnimation = document.getElementById('successAnimation');
+            const loadingContainer = document.getElementById('loadingContainer');
             
-            submitBtn.style.display = 'none';
-            statusMessage.className = 'status-message';
-            statusMessage.style.display = 'block';
-            statusMessage.style.background = 'rgba(255, 255, 255, 0.1)';
-            statusMessage.style.border = '1px solid rgba(0, 255, 136, 0.3)';
-            statusMessage.style.color = '#fff';
-            statusMessage.innerHTML = '<span class="loading"></span> Sending...';
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
             
             const formData = new FormData(this);
             
@@ -594,35 +740,66 @@
                 });
                 
                 if (response.status === 200 || response.ok) {
-                    statusMessage.className = 'status-message success';
-                    statusMessage.innerHTML = '✓ Message Sent Successfully!';
-                    this.reset();
+                    // Show success animation
+                    successAnimation.classList.add('show');
                     
+                    // Wait 2.5 seconds
                     setTimeout(() => {
-                        statusMessage.style.display = 'none';
-                        submitBtn.style.display = 'block';
-                    }, 4000);
+                        // Hide success animation
+                        successAnimation.classList.remove('show');
+                        
+                        // Collapse form with cinematic animation
+                        contactForm.classList.add('form-collapsing');
+                        
+                        // Show loading screen
+                        setTimeout(() => {
+                            contactForm.style.display = 'none';
+                            loadingContainer.classList.add('show');
+                            
+                            // Wait 2 seconds then restore form
+                            setTimeout(() => {
+                                // Hide loading
+                                loadingContainer.classList.remove('show');
+                                
+                                // Reset and show form
+                                contactForm.style.display = 'block';
+                                contactForm.classList.remove('form-collapsing');
+                                this.reset();
+                                submitBtn.disabled = false;
+                                submitBtn.style.opacity = '1';
+                            }, 2000);
+                        }, 600);
+                    }, 2500);
                 } else {
                     throw new Error('Failed to send');
                 }
             } catch (error) {
                 if (error.message.includes('CORS') || error.message.includes('redirect')) {
-                    statusMessage.className = 'status-message success';
-                    statusMessage.innerHTML = '✓ Message Sent Successfully!';
-                    this.reset();
+                    // Show success animation even with CORS
+                    successAnimation.classList.add('show');
                     
                     setTimeout(() => {
-                        statusMessage.style.display = 'none';
-                        submitBtn.style.display = 'block';
-                    }, 4000);
+                        successAnimation.classList.remove('show');
+                        contactForm.classList.add('form-collapsing');
+                        
+                        setTimeout(() => {
+                            contactForm.style.display = 'none';
+                            loadingContainer.classList.add('show');
+                            
+                            setTimeout(() => {
+                                loadingContainer.classList.remove('show');
+                                contactForm.style.display = 'block';
+                                contactForm.classList.remove('form-collapsing');
+                                this.reset();
+                                submitBtn.disabled = false;
+                                submitBtn.style.opacity = '1';
+                            }, 2000);
+                        }, 600);
+                    }, 2500);
                 } else {
-                    statusMessage.className = 'status-message error';
-                    statusMessage.innerHTML = '✗ Failed to send. Please try again.';
-                    
-                    setTimeout(() => {
-                        statusMessage.style.display = 'none';
-                        submitBtn.style.display = 'block';
-                    }, 6000);
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    alert('Failed to send message. Please try again.');
                 }
             }
         });
