@@ -449,7 +449,7 @@
 
                 <div class="form-group">
                     <textarea id="message" name="message" required placeholder=" "></textarea>
-                    <label for="message">Project Details</label>
+                    <label for="message">Message</label>
                     <div class="progress-line"></div>
                 </div>
 
@@ -630,7 +630,8 @@
         // Title glitch effect on hover
         const title = document.querySelector('h1');
         const originalText = title.innerHTML;
-        let glitchInterval;
+        let glitchInterval = null;
+        let isHovering = false;
         
         const binaryChars = ['0', '1'];
         const glitchColors = [
@@ -649,6 +650,15 @@
         }
         
         function glitchText() {
+            if (!isHovering) {
+                if (glitchInterval) {
+                    clearInterval(glitchInterval);
+                    glitchInterval = null;
+                }
+                title.innerHTML = originalText;
+                return;
+            }
+            
             const lines = originalText.split('<br>');
             const glitchedLines = lines.map(line => {
                 return line.split('').map(char => {
@@ -664,14 +674,20 @@
         }
         
         title.addEventListener('mouseenter', function() {
+            isHovering = true;
+            if (glitchInterval) {
+                clearInterval(glitchInterval);
+            }
             glitchInterval = setInterval(glitchText, 200);
         });
         
         title.addEventListener('mouseleave', function() {
-            clearInterval(glitchInterval);
-            setTimeout(() => {
-                title.innerHTML = originalText;
-            }, 100);
+            isHovering = false;
+            if (glitchInterval) {
+                clearInterval(glitchInterval);
+                glitchInterval = null;
+            }
+            title.innerHTML = originalText;
         });
 
         document.addEventListener('contextmenu', e => e.preventDefault());
